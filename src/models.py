@@ -17,7 +17,7 @@ def fit_predict(name, X_tr, y_tr, X_va, y_va, X_te, cat_cols, seed, fold=1):
     """
 
     # Ordnerpfad zum Speichern vorbereiten
-    save_dir = cfg.MODELS_DIR / "saved_models" / f"{name}_{cfg.FEATURE_SET}"
+    save_dir = cfg.MODELS_DIR / "saved_models" / f"{name}_{cfg.FEATURE_SET}{cfg.VARIANT_SUFFIX}"
     save_dir.mkdir(parents=True, exist_ok=True)
 
     # Dateipfade fuer Vorhersage-Checkpoints

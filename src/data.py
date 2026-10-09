@@ -95,8 +95,9 @@ def load_data(feature_set: str) -> Data:
         X_orig_raw = orig.drop(columns=[cfg.TARGET])
 
     # Aggregate/Haeufigkeiten einmal auf Train+Test(+Orig) berechnen (label-frei, kein Leakage)
+    # cfg.ORIG_IN_STATS=False: Original wird NICHT in die Statistiken von Train/Test einbezogen
     X, X_test, X_orig = add_features_joint(
-        X_raw, X_test_raw, X_orig_raw, feature_set, orig_in_stats=True
+        X_raw, X_test_raw, X_orig_raw, feature_set, orig_in_stats=cfg.ORIG_IN_STATS
     )
     if X_orig is not None:
         X_orig = X_orig[X.columns]

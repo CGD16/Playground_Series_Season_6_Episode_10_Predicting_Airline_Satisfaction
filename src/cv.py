@@ -14,7 +14,7 @@ from src.models import fit_predict
 
 def run_tag(model: str, feature_set: str) -> str:
     """Eindeutiger Name, z.B. 'xgb_fs02_s42'."""
-    return f"{model}_{feature_set}_s" + "-".join(str(s) for s in cfg.SEEDS)
+    return f"{model}_{feature_set}{cfg.VARIANT_SUFFIX}_s" + "-".join(str(s) for s in cfg.SEEDS)
 
 
 def get_target_encode(k_train, y_train, k_valid, smooth=20.0):
@@ -36,7 +36,7 @@ def run_cv(name: str, data: Data, feature_set: str) -> dict:
     total_start_time = time.time()
 
     # Ordnerpfad zu den Modell-Checkpoints
-    save_dir = cfg.MODELS_DIR / "saved_models" / f"{name}_{cfg.FEATURE_SET}"
+    save_dir = cfg.MODELS_DIR / "saved_models" / f"{name}_{cfg.FEATURE_SET}{cfg.VARIANT_SUFFIX}"
 
     # Iteration über alle Seeds
     for s_idx, seed in enumerate(cfg.SEEDS):
@@ -79,7 +79,7 @@ def run_cv(name: str, data: Data, feature_set: str) -> dict:
                     X_va["Route_Target_Enc"] = get_target_encode(X_tr["Route_ID"], y_tr, X_va["Route_ID"])
                     X_te["Route_Target_Enc"] = get_target_encode(X_tr["Route_ID"], y_tr, X_te["Route_ID"])
 
-                if data.X_orig is not None:
+                if data.X_orig is not None and cfg.USE_ORIG_ROWS:
                     X_o = data.X_orig.copy()
                     # Original-Zeilen bekommen das Encoding aus den Train-Fold-Labels (wie Valid/Test),
                     # sonst waeren sie NaN, waehrend alle anderen Trainingszeilen einen Wert haben

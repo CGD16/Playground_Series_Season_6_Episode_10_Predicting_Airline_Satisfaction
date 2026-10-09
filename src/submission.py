@@ -1,6 +1,7 @@
 # (sample_submission befüllen)
 """Submission schreiben und Experimente protokollieren."""
 from datetime import datetime
+import numpy as np
 import pandas as pd
 from src import config as cfg
 
@@ -15,12 +16,16 @@ def write_submission(test, sample_sub, test_pred, cv_auc: float):
     assert sub[target_col].notna().all(), "Fehlende Vorhersagen - IDs passen nicht"
     assert len(sub) == len(test)
     assert sub[target_col].between(0, 1).all()
+    # Schutz: die Competition verlangt Wahrscheinlichkeiten (AUC), keine 0/1-Entscheidungen
+    assert sub[target_col].nunique() > 10, "Submission wirkt binaer/diskret - Wahrscheinlichkeiten erwartet!"
 
     cfg.SUBMISSIONS_DIR.mkdir(parents=True, exist_ok=True)
     date = datetime.now().strftime("%Y%m%d_%H%M")
     path = cfg.SUBMISSIONS_DIR / f"sub_{date}_{cfg.EXP_NAME}_cv{cv_auc:.4f}.csv"
     sub.to_csv(path, index=False)
     print(f"Submission gespeichert: {path}")
+    print(sub[target_col].describe())
+    print(f"Eindeutige Werte: {sub[target_col].nunique()}")
     print(sub.head())
     return path
 

@@ -28,6 +28,13 @@ ID_COL = "id"
 FEATURE_SET = "fs06"
 EXP_NAME = "exp006_joint_stats"
 
+# --- Original-Daten-Schalter (Ergebnisse der Ablation: v3 / v8) ---
+USE_ORIG_ROWS = True    # False: Original-Zeilen NICHT ins Training haengen (Teacher-Feature bleibt!)
+ORIG_IN_STATS = True    # False: Aggregate nur auf Train+Test, Original bekommt eigene Statistiken
+# Suffix fuer Checkpoint-/OOF-Dateinamen, damit Varianten sich nicht gegenseitig ueberschreiben.
+# Bei den Standardwerten (True/True) bleibt alles wie bisher -> bestehende Checkpoints gelten weiter.
+VARIANT_SUFFIX = ("" if USE_ORIG_ROWS else "_noOrigRows") + ("" if ORIG_IN_STATS else "_origSep")
+
 MODELS = ["xgb", "lgbm", "cat"]    # beliebig kombinierbar
 N_SPLITS = 10
 SEEDS = [42, 2026, 10, 23, 16, 2, 8, 46] 
