@@ -1,0 +1,6 @@
+*.npy
+*.cbm
+*.csv
+*.json
+
+catboost_info/
