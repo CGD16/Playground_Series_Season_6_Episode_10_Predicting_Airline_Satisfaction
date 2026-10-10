@@ -25,11 +25,13 @@ ID_COL = "id"
 # FEATURE_SET = "fs03"               # fs00 = roh, fs01 = Basis-FE, fs02 = fs01 + Rating-Aggregate
 # FEATURE_SET = "fs05"
 # EXP_NAME = "exp005_advanced_features"
-FEATURE_SET = "fs06"
-EXP_NAME = "exp006_joint_stats"
+# FEATURE_SET = "fs06"
+# EXP_NAME = "exp006_joint_stats"
+FEATURE_SET = "fs07"
+EXP_NAME = "exp007_teacher_no_orig_rows"
 
 # --- Original-Daten-Schalter (Ergebnisse der Ablation: v3 / v8) ---
-USE_ORIG_ROWS = True    # False: Original-Zeilen NICHT ins Training haengen (Teacher-Feature bleibt!)
+USE_ORIG_ROWS = False    # False: Original-Zeilen NICHT ins Training haengen (Teacher-Feature bleibt!)
 ORIG_IN_STATS = True    # False: Aggregate nur auf Train+Test, Original bekommt eigene Statistiken
 # Suffix fuer Checkpoint-/OOF-Dateinamen, damit Varianten sich nicht gegenseitig ueberschreiben.
 # Bei den Standardwerten (True/True) bleibt alles wie bisher -> bestehende Checkpoints gelten weiter.

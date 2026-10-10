@@ -142,6 +142,7 @@ FEATURE_SETS = {
     "fs04": [_impute_clean, _delay, _combos, _distance, _rating_agg, _route_features, _aux_expected_ratings],
     "fs05": _FS05,                                       # Erweitertes FE-Set (Stats pro DataFrame)
     "fs06": _FS05,                                       # Wie fs05, aber via add_features_joint (gemeinsame Stats)
+    "fs07": _FS05,
 }
 
 
