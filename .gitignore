@@ -2,6 +2,7 @@
 *.cbm
 *.csv
 *.json
+*.txt
 
 catboost_info/
 Models/
