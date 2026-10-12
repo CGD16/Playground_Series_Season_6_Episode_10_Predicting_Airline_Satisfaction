@@ -1,4 +1,5 @@
 *.npy
+*.npz
 *.cbm
 *.csv
 *.json
